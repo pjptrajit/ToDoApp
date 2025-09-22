@@ -6,6 +6,10 @@ import Header from './components/Header'
 import EditToDo from './pages/EditToDo'
 
 function App() {
+  // localStorage.setItem("name", "Rajit Prajapati");
+  // console.log(localStorage.getItem("name"));
+ 
+  
   return (
     <div>
       <Header />

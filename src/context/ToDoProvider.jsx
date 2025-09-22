@@ -1,15 +1,20 @@
-import { createContext, useReducer } from "react";
+import { createContext, useEffect, useReducer } from "react";
 
 
 export const ToDoContext = createContext();
-export const ToDoProvider = ({children}) => {
-    let initialState = [];
+const doGet = ()=>{
+   
+        let data = localStorage.getItem("todo");
+        return data ? JSON.parse(data) : [];
+    
+}
+    let initialState = doGet();
     const reducer = (state, action) =>{
         switch(action.type){
             case "add":
                 const isExit = state.find((items)=>{
                     return items.id == action.payload.id;
-                })
+                })  
 
                 if(isExit)
                     return state;
@@ -31,8 +36,16 @@ export const ToDoProvider = ({children}) => {
         }
 
     }
+
+
+export const ToDoProvider = ({children}) => {
+
+
     const [state, dispatch] = useReducer(reducer, initialState);
     
+    useEffect(()=>{
+        localStorage.setItem("todo", JSON.stringify(state));
+    },[state]);
 
     return (
         <ToDoContext.Provider value={{state, dispatch}}>
