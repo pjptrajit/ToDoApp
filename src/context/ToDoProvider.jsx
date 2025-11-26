@@ -14,7 +14,7 @@ const doGet = ()=>{
             case "add":
                 const isExit = state.find((items)=>{
                     return items.id == action.payload.id;
-                })  
+                }) 
 
                 if(isExit)
                     return state;
